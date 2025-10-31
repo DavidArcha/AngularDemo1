@@ -1,0 +1,204 @@
+SignUp Component:
+
+I want to develop following requirements: into `SignUpComponent`.
+Implement .html,scss, and .ts. Also check the compiler errors 
+This component allows new users to register.
+Fields (FormGroup):
+• Full Name – required
+• Date of Birth – required (use date input type)
+• Email – required, valid email format
+• Phone Number – required, only digits, 10-digit format
+• Password – required, min 6 characters
+• Confirm Password – required, must match Password
+Buttons:
+• **Sign Up**:
+  - Validate the form.
+  - Then navigate to the login page.
+
+• **Cancel**:
+  - Navigate back to the login page without saving anything.
+
+Additional Points to take care:
+• Use Angular Reactive Forms
+• Basic client-side validation and error messages for all fields
+• Passwords should be masked (input type="password")
+• Use TypeScript, HTML, and SCSS.
+• Show a simple confirmation message after successful signup
+
+Important Notes:
+•	Use best practices and include comments where necessary.
+•	check the compiler errors.
+•	No Need to generate Readme.md file for each and every component.
+
+
+LoginPage:
+I want to develop following requirements: into  `LoginComponent`.
+Fields:
+• Email – required, must be a valid email format
+• Password – required
+Buttons:
+• **Login**:
+  - Validate form input.
+  - If credentials don't match, display an error message.
+• **Sign Up**:
+  - Navigate to the Signup Component.
+• **Cancel**:
+  - Clears all form fields (reset form).
+  - Stays on the same page.
+Validation Rules:
+• Both Email and Password are mandatory.
+• Email must be in a valid format.
+
+Technical Requirements:
+• Use Angular Reactive Forms.
+• Use TypeScript, HTML, and SCSS (do not use Bootstrap or Angular Material).
+• Password should be masked (input type="password").
+• Include error messages for invalid login or missing fields.
+• Provide navigation methods using Angular Router.
+• Keep the logic well-commented and clean.
+
+Important Notes:
+•	Use best practices and include comments where necessary.
+•	check the compiler errors.
+•	No Need to generate Readme.md file for each and every component.
+•	Clean TypeScript with proper typing
+•	Semantic HTML structure
+•	Custom SCSS without external frameworks
+•	Angular best practices with comments
+•	Accessibility compliant
+•	Mobile-responsive
+
+Dashboard Component:
+I want to develop following requirements: into ` DashboardComponent`.
+This is the landing page after a successful login. It should display a top navigation bar and show the Profile Page by default.
+Features:
+1. **Top Horizontal Navigation Bar**
+   - Left side: Static title text → "Angular Demo"
+   - Right side:
+     • Display the logged-in user’s full name.
+     • A "Logout" link
+
+ **Logout Functionality**
+   - Clicking "Logout" should:     
+     • Navigate back to the Login page
+
+Technical Requirements:
+• Use Angular component structure with TypeScript, HTML, and SCSS (no Bootstrap or Material).
+• Keep the navbar fixed to the top and styled with basic SCSS (background color, spacing).
+• The user name should be displayed using Angular interpolation.
+• Implement logout via router navigation + session cleanup.
+• Add meaningful comments and follow best practices.
+
+
+Important Notes:
+•	Use best practices and include comments where necessary.
+•	check the compiler errors.
+•	No Need to generate Readme.md file for each and every component.
+•	Clean TypeScript with proper typing
+•	Semantic HTML structure
+•	Custom SCSS without external frameworks
+•	Angular best practices with comments
+•	Accessibility compliant
+•	Mobile-responsive
+
+
+FunctionalService:
+
+We have a sevice file called "loginService"
+
+1. Service metadata
+• Use `@Injectable({ providedIn: 'root' })`.
+
+2. LocalStorage keys
+• Registered users array key: `"Userdetails"`.
+• Currently logged-in user key: `"currentUser"`.
+
+3. Exposed methods
+• `getRegisteredUsers(): User[]`
+  - Read and parse `"Userdetails"` from localStorage.
+  - Return an array (empty array if none).
+
+• `registerUser(user: User): void`
+  - Read `"Userdetails"`, append the new user, stringify and save back.
+  - Avoid duplicates by email (if email already exists, throw or return an error flag).
+
+• `validateUser(email: string, password: string): boolean`
+  - Read registered users and check for a user with matching email and password.
+  - If match:
+      · Save matched user object in `"currentUser"` in localStorage.
+      · Update any internal state if included.
+      · Return `true`.
+  - If not matched, return `false`.
+
+• `getCurrentUser(): User | null`
+  - Read and parse `"currentUser"` and return the object or `null`.
+
+• `logout(): void`
+  - Remove `"currentUser"` from localStorage.
+
+
+4. Types / Interfaces
+• Define a `User` interface in the service file (or import if preferred):
+interface User {
+fullName: string;
+dob: string;
+email: string;
+phone: string;
+password: string;
+}
+
+5. Error handling & defensive code
+• Handle JSON parse errors gracefully.
+• Null-checks when reading localStorage.
+• Keep methods synchronous (localStorage is synchronous).
+• Add clear comments showing how to call the methods from components:
+- `LoginComponent` should call `validateUser()` on login and navigate to Dashboard on `true`.
+- `Dashboard/ProfileComponent` should call `getCurrentUser()` (or subscribe to `currentUser$`) to display user details.
+
+6. Output
+• Generate a single file `login.service.ts` with the full implementation, comments.
+
+After signup we need to store the data in "Userdetails" and at the time of login check the user details and validate if it got success navigate to dashboard.
+
+In dash board display the Uderdeatils in Dashboard.
+
+----------------------------------------
+
+
+Generate signup.component.spec.ts unit tests based on the business logic in signup.component.ts.
+
+After generating all `.spec.ts` files:
+- Run `ng test` in Angular CLI.
+- Review the test output and fix any failing test cases.
+- Run `ng test --code-coverage` and verify the HTML coverage report (`/coverage/index.html`).
+- Target 90%+ coverage per file.
+
+
+---------------------------------------
+Write a Manula test cases based on the compnent code. somilar to below.
+
+Consider below is an example.
+
+Dashboard Component Manual Testing Guide
+Component Overview
+The Dashboard component serves as the main landing page after user authentication, displaying user information and providing logout functionality.
+
+Manual Test Cases
+TC001: Dashboard Page Load - Authenticated User
+Objective: Verify dashboard loads correctly for authenticated users
+
+Prerequisites: User must be logged in with valid credentials
+
+Steps:
+
+Login with valid credentials
+Navigate to dashboard page
+Verify page loads completely
+Check all UI elements are displayed
+Expected Result:
+
+Dashboard page loads without errors
+User's full name is displayed correctly
+Current date/last login information is shown
+Logout button is visible and accessible
+No console errors
